@@ -1,4 +1,14 @@
-.list {
-    margin-top: 30px;
-    margin-left: 30px;
+.info-block {
+    margin-left: 70px;
+}
+
+h4 {
+    color: #d4d4d4;
+    margin: 20px;
+}
+
+h5 {
+    font-weight: normal;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }

@@ -37,5 +37,21 @@ def list_prof(request_type):
     return render_template("list_prof.html", **params)
 
 
+@app.route("/auto_answer")
+@app.route("/answer")
+def auto_answer():
+    default_info = {
+        "title": "Анкета",
+        "surname": "Кириенко",
+        "name": "Георгий",
+        "education": "Высшее",
+        "profession": "Программист",
+        "sex": "male",
+        "motivation": "А почему бы и нет)",
+        "ready": True
+    }
+    return render_template("auto_answer.html", info=default_info, title=default_info["title"])
+
+
 if __name__ == "__main__":
     app.run(port=8000)
