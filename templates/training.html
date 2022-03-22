@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+{% endblock %}
+
+{% block content%}
+    {% set engineer_list = ["инженер", "строитель"] %}
+    {% set science_list = ["врач", "специалист по радиационной защите", "олог"] %}
+    {% set ns = namespace(chosen = false) %}
+    {% for elem in engineer_list %}
+        {% if elem in prof|lower() and not ns.chosen%}
+            <div>
+                <h2>Инженерные тренажёры</h2>
+                <img src="{{url_for('static', filename='img/engineer_training.png')}}" alt="Расположение инженерных тренажёров">
+            </div>
+        {%set ns.chosen = True%}
+        {% endif %}
+    {% endfor %}
+    {% for elem in science_list %}
+        {% if elem in prof|lower() and not ns.chosen%}
+            <div>
+                <h2>Научные симуляторы</h2>
+                <img src="{{url_for('static', filename='img/science_training.png')}}" alt="Расположение научных симуляторов">
+            </div>
+            {%set ns.chosen = True%}
+        {% endif %}
+    {% endfor %}
+    {% if not ns.chosen%}
+        <div>
+            <h2>Похоже, для вас ничего не нашлось!</h2>
+            <img src="{{way_to_static}}/sad_face.png" alt="Тут было грустное лицо, но оно не загрузилось(">
+        </div>
+    {% endif %}
+{% endblock %}
+
