@@ -1,0 +1,58 @@
+{% extends "base.html"%}
+
+{% block head %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+{% endblock%}
+
+{% block content %}
+    <div class="info-block">
+        <div>
+            <img src="{{url_for('static', filename='img/icon.png')}}" alt="иконка миссии">
+            <h1 id="access-header">Аварийный доступ</h1>
+        </div>
+        <form action="", method="POST" novalidate>
+            {{form.hidden_tag()}}
+            <div class="info">
+                {{ form.part_name.label }}<br>
+                {{ form.part_name(class="form-control") }}<br>
+                {% for error in form.part_name.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="info">
+                {{ form.part_pass.label }}<br>
+                {{ form.part_pass(class="form-control", type="password") }}<br>
+                {% for error in form.part_pass.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="info">
+                {{ form.cap_name.label }}<br>
+                {{ form.cap_name(class="form-control")}}<br>
+                {% for error in form.cap_name.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="info">
+                {{ form.cap_pass.label }}<br>
+                {{ form.cap_pass(class="form-control", type="password") }}<br>
+                {% for error in form.cap_pass.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="info">
+                {{ form.submit(type="submit", class="btn btn-primary") }}
+            </div>
+        </form>
+    </div>
+
+
+{% endblock %}

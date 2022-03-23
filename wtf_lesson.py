@@ -1,15 +1,25 @@
 from flask import Flask
-from flask import redirect
-from flask import url_for
-from flask import render_template
+from flask import redirect, url_for, render_template
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import DataRequired
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
+class AccessForm(FlaskForm):
+    part_name = StringField("Id астронавта", validators=[DataRequired()])
+    part_pass = PasswordField('Пароль астронавта', validators=[DataRequired()])
+    cap_name = StringField("Id капитана", validators=[DataRequired()])
+    cap_pass = PasswordField('Пароль капитана', validators=[DataRequired()])
+    submit = SubmitField('Доступ')
+
+
 @app.route('/')
 def redir():
-    return redirect("/Заголовок")
+    return redirect("/login"
+                    "")
 
 
 @app.route("/<title>")
@@ -50,7 +60,15 @@ def auto_answer():
         "motivation": "А почему бы и нет)",
         "ready": True
     }
-    return render_template("auto_answer.html", info=default_info, title=default_info["title"])
+    return render_template("auto_answer.html", **default_info)
+
+
+@app.route("/login", methods=["POST", "GET"])
+def solution():
+    form = AccessForm()
+    if form.validate_on_submit():
+        return "Выполняется приказ"
+    return render_template("login.html", form=form)
 
 
 if __name__ == "__main__":
